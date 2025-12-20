@@ -407,6 +407,8 @@ services:
     networks:
       traefik-proxy:
         ipv4_address: 192.168.100.10
+    labels:
+      - deunhealth.restart.on.unhealthy=true
     restart: unless-stopped
     logging: *default-logging
     healthcheck:
