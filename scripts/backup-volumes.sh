@@ -72,7 +72,24 @@ fi
 # Default backup location
 # Note: /tmp is cleared on reboot - copy tarball off-NAS promptly!
 BACKUP_DIR="${BACKUP_DIR:-/tmp/arr-stack-backup-$(date +%Y%m%d)}"
+
+# Check available space (need at least 100MB for safety)
+BACKUP_PARENT=$(dirname "$BACKUP_DIR")
+AVAILABLE_MB=$(df -m "$BACKUP_PARENT" 2>/dev/null | awk 'NR==2 {print $4}')
+if [ -n "$AVAILABLE_MB" ] && [ "$AVAILABLE_MB" -lt 100 ]; then
+  echo "ERROR: Not enough space on $BACKUP_PARENT (${AVAILABLE_MB}MB available, need 100MB)"
+  exit 1
+fi
+
 mkdir -p "$BACKUP_DIR"
+
+# Rotate old backups (keep 7 days)
+KEEP_DAYS=7
+if [ "$BACKUP_PARENT" != "/tmp" ]; then
+  # Only rotate if not backing up to /tmp (which auto-clears)
+  find "$BACKUP_PARENT" -maxdepth 1 -name "arr-stack-backup-*" -type d -mtime +$KEEP_DAYS -exec rm -rf {} \; 2>/dev/null
+  find "$BACKUP_PARENT" -maxdepth 1 -name "arr-stack-backup-*.tar.gz" -type f -mtime +$KEEP_DAYS -delete 2>/dev/null
+fi
 
 # Get current user for ownership fix (avoids needing sudo for tar)
 CURRENT_UID=$(id -u)
