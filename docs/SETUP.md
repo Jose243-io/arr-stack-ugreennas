@@ -502,7 +502,13 @@ Skip this if you only want torrents. SABnzbd provides Usenet downloads as an alt
 
 3. **Get API Key:** After wizard, go to Config (⚙️) → General → Copy **API Key**
 
-4. **Add Usenet indexer to Prowlarr** (next section):
+4. **Create Categories:** Config (⚙️) → Categories → Add each:
+   - `sonarr` (for TV shows)
+   - `radarr` (for movies)
+
+   > ⚠️ Categories must exist in SABnzbd **before** adding it as a download client in Sonarr/Radarr, or the connection test will fail.
+
+5. **Add Usenet indexer to Prowlarr** (next section):
    - NZBGeek ($12/year): https://nzbgeek.info
    - DrunkenSlug (free tier): https://drunkenslug.com
 
@@ -545,7 +551,7 @@ Skip this if you only want torrents. SABnzbd provides Usenet downloads as an alt
    - Host: `localhost` (SABnzbd also runs via gluetun)
    - Port: `8080`
    - API Key: (from SABnzbd Config → General)
-   - Category: `tv`
+   - Category: `sonarr` (must exist in SABnzbd first)
 
 ### 5.5 Radarr (Movies)
 
@@ -564,7 +570,7 @@ Skip this if you only want torrents. SABnzbd provides Usenet downloads as an alt
    - Host: `localhost` (SABnzbd also runs via gluetun)
    - Port: `8080`
    - API Key: (from SABnzbd Config → General)
-   - Category: `movies`
+   - Category: `radarr` (must exist in SABnzbd first)
 
 ### 5.6 Jellyfin (Media Server)
 
