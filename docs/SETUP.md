@@ -649,9 +649,30 @@ LAN_SUBNET=10.10.0.0/24
 LAN_GATEWAY=10.10.0.1
 ```
 
-**Step 2: Reserve the IP in your router**
+**Step 2: Exclude the IP from your router's DHCP pool**
 
-Go to your router's DHCP settings and reserve `TRAEFIK_LAN_IP` (e.g., 10.10.0.11) so nothing else takes it.
+Prevent your router from assigning `TRAEFIK_LAN_IP` to other devices:
+
+<details>
+<summary>MikroTik</summary>
+
+```bash
+# Option A: Adjust pool range to skip 10.10.0.11
+/ip pool set [find name=dhcp_pool] ranges=10.10.0.2-10.10.0.10,10.10.0.12-10.10.0.254
+
+# Option B: Block with dummy lease
+/ip dhcp-server lease add address=10.10.0.11 mac-address=00:00:00:00:00:00 comment="Traefik macvlan"
+```
+</details>
+
+<details>
+<summary>Other routers</summary>
+
+- **UniFi/consumer routers:** Set DHCP range to exclude the IP (e.g., start at .12)
+- **pfSense/OPNsense:** Add static mapping with any MAC, or adjust pool range
+</details>
+
+> **Note:** A traditional "DHCP reservation" won't work here because the container's MAC changes on restart. You need to exclude the IP from the pool entirely.
 
 **Step 3: Deploy Traefik with macvlan (on NAS via SSH)**
 ```bash
@@ -673,8 +694,8 @@ sed "s/TRAEFIK_LAN_IP/10.10.0.11/g" pihole/02-local-dns.conf.example > pihole/02
 # Enable dnsmasq.d configs in Pi-hole v6 (one-time)
 docker exec pihole sed -i 's/etc_dnsmasq_d = false/etc_dnsmasq_d = true/' /etc/pihole/pihole.toml
 
-# Reload DNS
-docker exec pihole pihole reloaddns
+# Restart Pi-hole to load new config
+docker compose -f docker-compose.arr-stack.yml restart pihole
 ```
 
 **Step 5: Set router DNS**
