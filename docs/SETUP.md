@@ -672,8 +672,7 @@ Issues? [Report on GitHub](https://github.com/Pharkie/arr-stack-ugreennas/issues
 
 ## External Access (Optional)
 
-<details>
-<summary><strong>Cloudflare Tunnel Setup</strong></summary>
+### Cloudflare Tunnel Setup
 
 Cloudflare Tunnel connects outbound from your server, bypassing port forwarding and ISP restrictions. This setup uses the CLI and a local config file (not the Cloudflare web dashboard) for wildcard DNS routing - only 2 DNS records for all services.
 
@@ -721,8 +720,6 @@ EOF
 docker run --rm -v ./cloudflared:/home/nonroot/.cloudflared cloudflare/cloudflared tunnel route dns nas-tunnel "*.yourdomain.com"
 docker run --rm -v ./cloudflared:/home/nonroot/.cloudflared cloudflare/cloudflared tunnel route dns nas-tunnel yourdomain.com
 ```
-
-</details>
 
 ### Update Traefik Config
 
