@@ -5,7 +5,7 @@ Complete setup guide for the media automation stack. Works on any Docker host wi
 ## Table of Contents
 
 - [Requirements](#requirements)
-- [Choose Your Setup](#choose-your-setup) ← Start here
+- [Choose Your Setup](#choose-your-setup)
 - [Stack Overview](#stack-overview)
 - [Step 1: Create Directories](#step-1-create-directories-and-clonefork-repository)
 - [Step 2: Configure Settings](#step-2-configure-settings)
