@@ -17,7 +17,7 @@ When someone requests a movie or TV show, here's what happens:
                            Through VPN (Gluetun)                              Not through VPN
 ```
 
-1. **Jellyseerr** - User requests "The Office Season 1"
+1. **Jellyseerr** - User requests a TV show
 2. **Sonarr** - Receives request, monitors for releases
 3. **Prowlarr** - Searches indexers for downloads
 4. **qBittorrent** - Downloads the files (through VPN)
