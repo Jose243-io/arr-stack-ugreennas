@@ -141,3 +141,31 @@ Services start in dependency order (handled automatically by `depends_on`):
 3. **Sonarr, Radarr, Prowlarr, qBittorrent, SABnzbd** → VPN-protected services
 4. **Jellyseerr, Bazarr** → Connect to Sonarr/Radarr via Gluetun
 5. **Jellyfin, WireGuard, FlareSolverr** → Independent, start anytime
+
+## Compose Files
+
+### `docker-compose.arr-stack.yml` (Core)
+
+| Service | Description |
+|---------|-------------|
+| Jellyfin | Media streaming |
+| Jellyseerr | Request system |
+| Sonarr | TV management |
+| Radarr | Movie management |
+| Prowlarr | Indexer manager |
+| qBittorrent | Torrent client |
+| SABnzbd | Usenet client |
+| Bazarr | Subtitles |
+| Gluetun | VPN gateway |
+| Pi-hole | DNS/ad-blocking |
+| WireGuard | VPN server |
+| FlareSolverr | CAPTCHA bypass |
+
+### `docker-compose.utilities.yml` (Optional)
+
+| Service | Description |
+|---------|-------------|
+| deunhealth | Auto-restart on VPN reconnect |
+| Uptime Kuma | Monitoring dashboard |
+| duc | Disk usage treemap |
+| qbit-scheduler | Pause torrents overnight |

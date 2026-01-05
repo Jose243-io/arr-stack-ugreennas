@@ -129,18 +129,9 @@ If you use Tailscale: skip the WireGuard *service* (the `WG_PASSWORD_HASH` stuff
 | `docker-compose.cloudflared.yml` | Secure tunnel to Cloudflare (no port forwarding) | + remote access |
 | `docker-compose.utilities.yml` | Monitoring, auto-recovery, disk usage | Optional extras |
 
-See [Quick Reference](REFERENCE.md) for .lan URLs and network details.
+See [Quick Reference](REFERENCE.md) for full service lists, .lan URLs, and network details.
 
 > **Prefer Plex?** Use `docker-compose.plex-arr-stack.yml` instead of `arr-stack` (untested).
-
-### `docker-compose.utilities.yml`
-
-| Service | Description |
-|---------|-------------|
-| **deunhealth** | Auto-restart on VPN reconnect |
-| **Uptime Kuma** | Monitoring dashboard |
-| **duc** | Disk usage treemap |
-| **qbit-scheduler** | Pause torrents overnight |
 
 ---
 
