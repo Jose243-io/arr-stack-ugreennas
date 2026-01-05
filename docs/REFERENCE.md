@@ -133,7 +133,7 @@ Services start in dependency order (handled automatically by `depends_on`):
 
 ## Compose Files
 
-### `docker-compose.arr-stack.yml` (Core)
+### `docker-compose.arr-stack.yml` (Core - Jellyfin)
 
 | Service | Description |
 |---------|-------------|
@@ -149,6 +149,35 @@ Services start in dependency order (handled automatically by `depends_on`):
 | Pi-hole | DNS/ad-blocking |
 | WireGuard | VPN server |
 | FlareSolverr | CAPTCHA bypass |
+
+### `docker-compose.plex-arr-stack.yml` (Core - Plex)
+
+| Service | Description |
+|---------|-------------|
+| Plex | Media streaming |
+| Overseerr | Request system |
+| Sonarr | TV management |
+| Radarr | Movie management |
+| Prowlarr | Indexer manager |
+| qBittorrent | Torrent client |
+| SABnzbd | Usenet client |
+| Bazarr | Subtitles |
+| Gluetun | VPN gateway |
+| Pi-hole | DNS/ad-blocking |
+| WireGuard | VPN server |
+| FlareSolverr | CAPTCHA bypass |
+
+### `docker-compose.traefik.yml` (+ local DNS)
+
+| Service | Description |
+|---------|-------------|
+| Traefik | Reverse proxy for .lan domains |
+
+### `docker-compose.cloudflared.yml` (+ remote access)
+
+| Service | Description |
+|---------|-------------|
+| Cloudflared | Tunnel to Cloudflare for external access |
 
 ### `docker-compose.utilities.yml` (Optional)
 
